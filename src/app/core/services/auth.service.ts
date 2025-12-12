@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, throwError } from 'rxjs';
-import { MockDbService } from './mock-db.service';
+
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.model';
+import { MockDbService } from './mock-db.service';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
