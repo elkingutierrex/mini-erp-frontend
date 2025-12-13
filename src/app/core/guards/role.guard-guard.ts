@@ -1,6 +1,7 @@
 import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+declare let alertify: any;
 
 export const roleGuard = (requiredPermission: string): CanActivateFn => {
   return () => {
@@ -8,11 +9,11 @@ export const roleGuard = (requiredPermission: string): CanActivateFn => {
     const router = inject(Router);
     if (!auth.isAuthenticated()) {
       router.navigate(['/auth/login']);
-      console.log('roleGuard --- No autenticado - redirigiendo al login');
+      alertify.error('roleGuard, No autenticado - redirigiendo al login');
       return false;
     }
     if (!auth.hasPermission(requiredPermission)) {
-      console.log('roleGuard --- No tiene permiso:', requiredPermission);
+      alertify.error(`roleGuard --- No tiene permiso:', ${requiredPermission}}`);
       router.navigate(['/']);
       return false;
     }
