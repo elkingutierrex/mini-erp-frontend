@@ -38,9 +38,9 @@ export class MockDbService {
   // seeds
   private initialUsers(): User[] {
     return [
-      { id: 'u1', email: 'vendedor@erp.test', password: 'vendedor', name: 'Juan Vendedor', role: 'seller', permissions: ['CanCreateSale'] , token: ''},
-      { id: 'u2', email: 'admin@erp.test', password: 'admin', name: 'Ana Admin', role: 'admin', permissions: ['CanViewAllSales'] , token: ''},
-      { id: 'u3', email: 'gerente@erp.test', password: 'gerente', name: 'Gina Gerente', role: 'manager', permissions: ['CanCreateSale','CanViewAllSales','CanManageRoles'] , token: ''}
+      { id: 'u1', email: 'saller1@erp.test',  password: '123', name: 'Juan Vendedor', role: 'seller', permissions: ['CanCreateSale'] , token: ''},
+      { id: 'u2', email: 'admin@erp.test',    password: '123', name: 'Ana Admin', role: 'admin', permissions: ['CanViewAllSales'] , token: ''},
+      { id: 'u3', email: 'manager@erp.test',  password: '123', name: 'Gina Gerente', role: 'manager', permissions: ['CanCreateSale','CanViewAllSales','CanManageRoles'] , token: ''}
     ];
   }
 

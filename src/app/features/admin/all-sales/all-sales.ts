@@ -1,11 +1,17 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
+import { SalesService } from '../../../core/services/sales.service';
 
 @Component({
+  standalone: true,
   selector: 'app-all-sales',
-  imports: [],
   templateUrl: './all-sales.html',
-  styleUrl: './all-sales.scss',
+  styleUrls: ['./all-sales.scss'],
+  providers: [CommonModule, DatePipe, CurrencyPipe]
 })
-export class AllSales {
-
+export class AllSales implements OnInit {
+  sales: any[] = [];
+  constructor(private salesService: SalesService) {}
+  ngOnInit(){ this.salesService.getAllSales().subscribe(s=>this.sales=s); }
 }

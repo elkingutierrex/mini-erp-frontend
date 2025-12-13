@@ -1,1 +1,14 @@
-<p>all-sales works!</p>
+ <div class="container mt-3">
+    <h4>Todas las Ventas (Admin)</h4>
+    <table class="table">
+      <thead><tr><th>ID</th><th>Vendedor</th><th>Fecha</th><th>Total</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let s of sales">
+          <td>{{s.id}}</td>
+          <td>{{s.sellerId}}</td>
+          <td>{{s.createdAt }}</td>
+          <td>{{s.total }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

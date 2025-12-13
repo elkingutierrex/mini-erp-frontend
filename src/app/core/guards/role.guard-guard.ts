@@ -8,9 +8,11 @@ export const roleGuard = (requiredPermission: string): CanActivateFn => {
     const router = inject(Router);
     if (!auth.isAuthenticated()) {
       router.navigate(['/auth/login']);
+      console.log('roleGuard --- No autenticado - redirigiendo al login');
       return false;
     }
     if (!auth.hasPermission(requiredPermission)) {
+      console.log('roleGuard --- No tiene permiso:', requiredPermission);
       router.navigate(['/']);
       return false;
     }

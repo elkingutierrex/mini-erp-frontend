@@ -1,1 +1,29 @@
-<p>login works!</p>
+  <div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-md-4">
+        <h3>Login</h3>
+        <form (ngSubmit)="onLogin()">
+          <div class="mb-3">
+            <label>Email</label>
+            <input [(ngModel)]="email" name="email" class="form-control" required>
+          </div>
+          <div class="mb-3">
+            <label>Password</label>
+            <input [(ngModel)]="password" name="password" type="password" class="form-control" required>
+          </div>
+          <button class="btn btn-primary w-100">Entrar</button>
+        </form>
+        <div *ngIf="error" class="alert alert-danger mt-2">{{error}}</div>
+      </div>
+    </div>
+  </div>
+
+  <pre>
+
+    Email Usuarios de prueba:
+    'saller1@erp.test',
+    'admin@erp.test',
+    'manager@erp.test',
+
+    Password : 123
+  </pre>

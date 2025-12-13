@@ -1,1 +1,19 @@
-<p>roles-crud works!</p>
+  <div class="container mt-3">
+    <h4>Roles - Gestión rápida</h4>
+    <table class="table">
+      <thead><tr><th>Usuario</th><th>Rol</th><th>Acciones</th></tr></thead>
+      <tbody>
+        <tr *ngFor="let u of users">
+          <td>{{u.name}} ({{u.email}})</td>
+          <td>
+            <select [(ngModel)]="u.role" class="form-select form-select-sm">
+              <option>Vendedor</option>
+              <option>Administrador</option>
+              <option>Gerente</option>
+            </select>
+          </td>
+          <td><button class="btn btn-sm btn-primary" (click)="save(u)">Guardar</button></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
