@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -8,5 +8,15 @@ import { RouterModule } from '@angular/router';
   styleUrl: './navbar.scss',
 })
 export class Navbar {
+
+   isOpen = signal(false);
+
+  toggle() {
+    this.isOpen.update(v => !v);
+  }
+
+  close() {
+    this.isOpen.set(false);
+  }
 
 }

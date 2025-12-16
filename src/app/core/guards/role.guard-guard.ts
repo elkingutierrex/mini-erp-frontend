@@ -13,7 +13,7 @@ export const roleGuard = (requiredPermission: string): CanActivateFn => {
       return false;
     }
     if (!auth.hasPermission(requiredPermission)) {
-      alertify.error(`roleGuard --- No tiene permiso:', ${requiredPermission}}`);
+      alertify.error(`roleGuard --- No tiene permiso:', ${requiredPermission}`);
       router.navigate(['/']);
       return false;
     }

@@ -1,53 +1,43 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container">
-    <a
-      class="navbar-brand"
-      routerLink="/"
-      routerLinkActive="active"
-      [routerLinkActiveOptions]="{ exact: true }"
-    >
-      MiniERP
-    </a>
 
-    <div class="collapse navbar-collapse">
+    <a class="navbar-brand" routerLink="/" (click)="close()">MiniERP</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      (click)="toggle()"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div
+      class="collapse navbar-collapse"
+      [class.show]="isOpen()"
+    >
       <ul class="navbar-nav me-auto">
 
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/ventas/products"
-            routerLinkActive="active"
-          >
+          <a class="nav-link" routerLink="/ventas/products" routerLinkActive="active" (click)="close()">
             Productos
           </a>
         </li>
 
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/ventas/mis-ventas"
-            routerLinkActive="active"
-          >
+          <a class="nav-link" routerLink="/ventas/mis-ventas" routerLinkActive="active" (click)="close()">
             Mis Ventas
           </a>
         </li>
 
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/admin/all-sales"
-            routerLinkActive="active"
-          >
+          <a class="nav-link" routerLink="/admin/all-sales" routerLinkActive="active" (click)="close()">
             Admin
           </a>
         </li>
 
         <li class="nav-item">
-          <a
-            class="nav-link"
-            routerLink="/manager/dashboard"
-            routerLinkActive="active"
-          >
+          <a class="nav-link" routerLink="/manager/dashboard" routerLinkActive="active" (click)="close()">
             Gerente
           </a>
         </li>
