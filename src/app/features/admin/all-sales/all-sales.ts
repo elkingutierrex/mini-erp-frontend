@@ -8,7 +8,7 @@ import { SalesService } from '../../../core/services/sales.service';
   selector: 'app-all-sales',
   templateUrl: './all-sales.html',
   styleUrls: ['./all-sales.scss'],
-  providers: [CommonModule, DatePipe, CurrencyPipe]
+  providers: [CommonModule, DatePipe, CurrencyPipe, DatePipe]
 })
 export class AllSales implements OnInit {
   sales: any[] = [];

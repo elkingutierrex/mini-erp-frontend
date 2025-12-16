@@ -40,6 +40,8 @@ export class AuthService {
 
           sessionStorage.setItem('id', this.currentUser.user?.id!);
           sessionStorage.setItem('accessToken', this.currentUser.accessToken!);
+          console.log('este es el accessToken', this.currentUser.accessToken!);
+
           return user;
         })
       );

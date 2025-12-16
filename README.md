@@ -3,6 +3,16 @@
 ## Objetivo
 Proyecto de demostración para arquitectura limpia, rapidez de entrega y buenas prácticas. Implementa un frontend en Angular 21 con componentes standalone, rutas modulares y servicios mock que simulan la API.
 
+## Stack Tecnológico
+- Angular 21
+- TypeScript
+- Standalone Components
+- Bootstrap
+- RxJS
+- Chart.js + ng2-charts
+- Angular Router
+- HTTP Interceptors
+
 ## Características
 - Autenticación mock (email/password) con token simulado.
 - Roles: Vendedor, Administrador, Gerente.
@@ -36,6 +46,33 @@ Proyecto de demostración para arquitectura limpia, rapidez de entrega y buenas 
 4. Agregar EF Core + PostgreSQL (migraciones + seed).
 
 ## Usuarios de prueba
-- vendedor@erp.test / vendedor
-- admin@erp.test / admin
-- gerente@erp.test / gerente
+- seller1@erp.test / 123
+- seller2@erp.test / 123
+- seller3@erp.test / 123
+- admin@erp.test / 123
+- manager@erp.test / 123
+
+## Características Principales
+
+### Autenticación
+- Login mock (email / password).
+- Generación de token simulado (JWT-like).
+- Persistencia de sesión en `localStorage`.
+- Carga automática del usuario autenticado al refrescar la aplicación.
+
+### Roles
+- Vendedor
+- Administrador
+- Gerente
+
+### Permisos
+La autorización se basa en **permisos (claims)** y no únicamente en roles, permitiendo mayor flexibilidad y escalabilidad.
+
+Ejemplos:
+- `sales:create`
+- `sales:view:own`
+- `sales:view:all`
+- `roles:manage`
+- `dashboard:view`
+
+---

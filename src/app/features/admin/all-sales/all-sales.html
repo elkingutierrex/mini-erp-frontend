@@ -6,8 +6,8 @@
         @for (s of sales; track s.id) {
           <tr>
             <td>{{s.id}}</td>
-            <td>{{s.sellerId}}</td>
-            <td>{{s.createdAt }}</td>
+            <td>{{s.seller}}</td>
+            <td>{{s.createdAt | date:'short'}}</td>
             <td>{{s.total }}</td>
           </tr>
         }
