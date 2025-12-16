@@ -1,25 +1,64 @@
 import { Injectable } from '@angular/core';
-import { Sale } from '../models/sale.model';
+import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { Sale } from '../models/sale.model';
 import { AuthService } from './auth.service';
 import { MockDbService } from './mock-db.service';
+import { environment } from '../../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class SalesService {
-  constructor(private db: MockDbService, private auth: AuthService) {}
+  private readonly apiUrl = `${environment.apiUrl}/sales`;
 
-  createSale(items: { productId: string; quantity: number; price: number }[]): Observable<Sale> {
-    const sellerId = this.auth.getCurrentUser()!.id;
-    const total = items.reduce((s, it) => s + it.quantity * it.price, 0);
-    return this.db.addSale({ sellerId, items, total } as any);
+  constructor(
+    private http: HttpClient,
+    private db: MockDbService,
+    private auth: AuthService
+  ) {}
+
+  // ============================
+  // CREATE SALE
+  // ============================
+  createSale(
+    items: { productId: string; quantity: number; price: number }[]
+  ): Observable<Sale> {
+    const total = items.reduce(
+      (sum, item) => sum + item.quantity * item.price,
+      0
+    );
+
+    if (environment.useMock) {
+      const sellerId = this.auth.getCurrentUser()!.id;
+      return this.db.addSale({ sellerId, items, total } as any);
+    }
+
+    // 🔥 NO enviamos sellerId (backend lo toma del JWT)
+    return this.http.post<Sale>(this.apiUrl, {
+      items,
+      total
+    });
   }
 
+  // ============================
+  // GET MY SALES
+  // ============================
   getMySales(): Observable<Sale[]> {
-    const me = this.auth.getCurrentUser()!;
-    return this.db.getSales().pipe(map(sales => sales.filter(s => s.sellerId === me.id)));
+    if (environment.useMock) {
+      const me = this.auth.getCurrentUser()!.id;
+      return this.db.getSales().pipe(
+        map(sales => sales.filter(s => s.sellerId === me))
+      );
+    }
+
+    return this.http.get<Sale[]>(`${this.apiUrl}/my-sales`);
   }
 
+  // ============================
+  // GET ALL SALES (ADMIN)
+  // ============================
   getAllSales(): Observable<Sale[]> {
-    return this.db.getSales();
+    return environment.useMock
+      ? this.db.getSales()
+      : this.http.get<Sale[]>(this.apiUrl);
   }
 }

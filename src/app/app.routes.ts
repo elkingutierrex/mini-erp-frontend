@@ -20,5 +20,5 @@ export const routes: Routes = [
   { path: 'ventas/mis-ventas', component: MySales, canActivate: [authGuard] },
   { path: 'admin/all-sales', component: AllSales, canActivate: [roleGuard('CanViewAllSales')] },
   { path: 'manager/roles', component: RolesCrud, canActivate: [roleGuard('CanManageRoles')] },
-  { path: 'manager/dashboard', component: ManagerDashboard, canActivate: [roleGuard('CanViewAllSales')] },
+  { path: 'manager/dashboard', component: ManagerDashboard, canActivate: [roleGuard('CanManageRoles')] },
 ];

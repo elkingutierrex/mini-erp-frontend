@@ -1,27 +1,48 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, throwError } from 'rxjs';
-
-import { map } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable, map, throwError } from 'rxjs';
 import { User } from '../models/user.model';
 import { MockDbService } from './mock-db.service';
+import { environment } from '../../../environments/environment';
+
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private currentUser?: User;
+  private readonly apiUrl = `${environment.apiUrl}/auth`;
 
-  constructor(private db: MockDbService) {}
+  constructor(
+    private http: HttpClient,
+    private db: MockDbService
+  ) {}
 
   login(email: string, password: string): Observable<User> {
-    return this.db.getUsers().pipe(
-      map(users => {
-        const u = users.find(x => x.email === email && x.password === password);
-        if (!u) throw new Error('Credenciales inválidas');
-        // mock token
-        const token = btoa(`${u.id}:${u.email}:${Date.now()}`);
-        this.currentUser = { ...u, token };
-        return this.currentUser;
-      })
-    );
+    if (environment.useMock) {
+      return this.db.getUsers().pipe(
+        map(users => {
+          const u = users.find(x => x.email === email && x.password === password);
+          if (!u) throw new Error('Credenciales inválidas');
+
+          const accessToken = btoa(`${u.id}:${u.email}:${Date.now()}`);
+          this.currentUser = { ...u, accessToken };
+          console.log(this.currentUser);
+          return this.currentUser;
+        })
+      );
+    }
+
+    // API REAL
+    return this.http.post<User>(`${this.apiUrl}/login`, { email, password })
+      .pipe(
+        map(user => {
+          this.currentUser = user;
+          console.log(this.currentUser);
+
+          sessionStorage.setItem('id', this.currentUser.user?.id!);
+          sessionStorage.setItem('accessToken', this.currentUser.accessToken!);
+          return user;
+        })
+      );
   }
 
   logout() {
@@ -37,10 +58,10 @@ export class AuthService {
   }
 
   hasPermission(permission: string): boolean {
-    return !!this.currentUser && this.currentUser.permissions.includes(permission);
+    return !!this.currentUser && this.currentUser.user.permissions.includes(permission) ;
   }
 
   getToken(): string | undefined {
-    return this.currentUser?.token;
+    return this.currentUser?.accessToken;
   }
 }

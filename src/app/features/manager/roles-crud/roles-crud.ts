@@ -5,7 +5,7 @@ import { MockDbService } from '../../../core/services/mock-db.service';
 
 @Component({
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule, FormsModule],
   selector: 'app-roles-crud',
   templateUrl: './roles-crud.html',
   styleUrls: ['./roles-crud.scss']

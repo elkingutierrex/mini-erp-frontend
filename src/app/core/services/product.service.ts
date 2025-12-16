@@ -1,13 +1,32 @@
 import { Injectable } from '@angular/core';
-
-import { Product } from '../models/product.model';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Product } from '../models/product.model';
 import { MockDbService } from './mock-db.service';
+import { environment } from '../../../environments/environment';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
-  constructor(private db: MockDbService) {}
+  private readonly apiUrl = `${environment.apiUrl}/products`;
 
-  getAll(): Observable<Product[]> { return this.db.getProducts(); }
-  getById(id: string) { return this.db.getProducts().pipe(); }
+  constructor(
+    private http: HttpClient,
+    private db: MockDbService
+  ) {}
+
+  getAll(): Observable<Product[]> {
+    return environment.useMock
+      ? this.db.getProducts()
+      : this.http.get<Product[]>(this.apiUrl);
+  }
+
+  getById(id: string): Observable<Product> {
+    return environment.useMock
+      ? this.db.getProducts()
+          // simple mock lookup
+          .pipe(map(products => products.find(p => p.id === id)!))
+      : this.http.get<Product>(`${this.apiUrl}/${id}`);
+  }
 }

@@ -7,6 +7,8 @@ export interface User {
   name: string;
   role: RoleName;
   permissions: string[]; // claims
-  token?: string;
+  accessToken?: string;
+  expiresIn?: number;
+  user: { id: string; email: string; role: RoleName; permissions: string[] };
 }
 

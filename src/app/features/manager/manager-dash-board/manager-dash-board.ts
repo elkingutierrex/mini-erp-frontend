@@ -12,7 +12,10 @@ import { SalesService } from '../../../core/services/sales.service';
   imports: [BaseChartDirective]
 })
 export class ManagerDashboard implements OnInit {
-  chartData: ChartDataset[]  = [{ data: [], label: 'Ventas' }];
+  chartData: ChartData<'bar', number[], string> = {
+    labels: [],
+    datasets: [{ data: [], label: 'Ventas' }]
+  };
   chartOptions: ChartOptions = { responsive: true };
 
   constructor(private salesService: SalesService) {}
@@ -25,8 +28,9 @@ export class ManagerDashboard implements OnInit {
         const day = new Date(s.createdAt).toLocaleDateString();
         map.set(day, (map.get(day) || 0) + s.total);
       });
-      this.chartData[0].data = Array.from(map.values());
-      // las labels se configuran en options si se necesita; ng2-charts puede tomar labels binding
+      this.chartData.datasets[0].data = Array.from(map.values());
+      this.chartData.labels = Array.from(map.keys());
+      // ng2-charts consumes `ChartData` object with `labels` + `datasets`
     });
   }
 }

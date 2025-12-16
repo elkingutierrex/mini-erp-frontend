@@ -38,19 +38,20 @@ export class MockDbService {
   // seeds
   private initialUsers(): User[] {
     return [
-      { id: 'u1', email: 'saller1@erp.test',  password: '123', name: 'Juan Vendedor', role: 'seller', permissions: ['CanCreateSale'] , token: ''},
-      { id: 'u2', email: 'admin@erp.test',    password: '123', name: 'Ana Admin', role: 'admin', permissions: ['CanViewAllSales'] , token: ''},
-      { id: 'u3', email: 'manager@erp.test',  password: '123', name: 'Gina Gerente', role: 'manager', permissions: ['CanCreateSale','CanViewAllSales','CanManageRoles'] , token: ''}
+      // { id: 'u1', email: 'seller1@erp.test',  password: '123', name: 'Juan Vendedor', role: 'seller', permissions: ['CanCreateSale'] , accessToken: '', expiresIn: 3600},
+      // { id: 'u1', email: 'seller2@erp.test',  password: '123', name: 'Juan Vendedor', role: 'seller', permissions: ['CanCreateSale'] , accessToken: '', expiresIn: 3600},
+      // { id: 'u2', email: 'admin@erp.test',    password: '123', name: 'Ana Admin', role: 'admin', permissions: ['CanViewAllSales'] , accessToken: '', expiresIn: 3600},
+      // { id: 'u3', email: 'manager@erp.test',  password: '123', name: 'Gina Gerente', role: 'manager', permissions: ['CanCreateSale','CanViewAllSales','CanManageRoles'] , accessToken: '', expiresIn: 3600}
     ];
   }
 
   private initialProducts(): Product[] {
     return [
-      { id: 'p1', name: 'Producto A', price: 10 },
-      { id: 'p2', name: 'Producto B', price: 15 },
-      { id: 'p3', name: 'Producto C', price: 23 },
-      { id: 'p4', name: 'Producto D', price: 7 },
-      { id: 'p5', name: 'Producto E', price: 50 }
+      { id: 'p1', name: 'Computer', price: 10 },
+      { id: 'p2', name: 'Mouse', price: 15 },
+      { id: 'p3', name: 'Keyboard', price: 23 },
+      { id: 'p4', name: 'Monitor', price: 7 },
+      { id: 'p5', name: 'Headset', price: 50 }
     ];
   }
 
