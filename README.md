@@ -45,6 +45,24 @@ Proyecto de demostración para arquitectura limpia, rapidez de entrega y buenas 
 3. Sustituir MockDbService por `HttpClient` que apunte a la API.
 4. Agregar EF Core + PostgreSQL (migraciones + seed).
 
+---
+
+## Configuración de conexión con Backend (.NET)
+
+El frontend está preparado para conectarse a un backend real mediante **environment variables**, permitiendo cambiar de entorno sin modificar el código fuente.
+
+---
+
+### Environments
+
+#### `environment.ts` (desarrollo)
+
+```ts
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:5031/api' //Configurar el puerto
+};
+
 ## Usuarios de prueba
 - seller1@erp.test / 123
 - seller2@erp.test / 123
