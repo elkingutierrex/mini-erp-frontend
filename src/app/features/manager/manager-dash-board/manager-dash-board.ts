@@ -3,13 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { ChartData, ChartDataset, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { SalesService } from '../../../core/services/sales.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   standalone: true,
   selector: 'app-manager-dashboard',
   templateUrl: './manager-dash-board.html',
   styleUrls: ['./manager-dash-board.scss'],
-  imports: [BaseChartDirective]
+  imports: [BaseChartDirective, DatePipe]
 })
 export class ManagerDashboard implements OnInit {
   chartData: ChartData<'bar', number[], string> = {
