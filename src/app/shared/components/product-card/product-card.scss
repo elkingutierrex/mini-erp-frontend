@@ -1,0 +1,23 @@
+.product-card {
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  }
+}
+
+.product-image {
+  height: 180px;
+  object-fit: cover;
+}
+
+.card-title {
+  font-weight: 500;
+}
+
+.btn {
+  border-radius: 8px;
+}
