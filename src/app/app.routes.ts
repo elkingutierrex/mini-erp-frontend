@@ -16,6 +16,12 @@ export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'ventas/products' },
   { path: 'auth/login', component: Login },
   { path: 'ventas/products', component: ProductsList, canActivate: [authGuard] },
+  {
+  path: 'products',
+  loadComponent: () =>
+    import('./features/sales/pages/products-page/products-page')
+      .then(m => m.ProductsPage),
+  },
   { path: 'ventas/create', component: CreateSale, canActivate: [authGuard] },
   { path: 'ventas/mis-ventas', component: MySales, canActivate: [authGuard] },
   { path: 'admin/all-sales', component: AllSales, canActivate: [roleGuard('CanViewAllSales')] },
