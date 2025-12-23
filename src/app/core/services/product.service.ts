@@ -26,7 +26,7 @@ export class ProductService {
     return environment.useMock
       ? this.db.getProducts()
           // simple mock lookup
-          .pipe(map(products => products.find(p => p.id === id)!))
+          .pipe(map(products => products.find((p:any) => p.id === id)!))
       : this.http.get<Product>(`${this.apiUrl}/${id}`);
   }
 }

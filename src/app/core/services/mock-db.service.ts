@@ -45,7 +45,7 @@ export class MockDbService {
     ];
   }
 
-  private initialProducts(): Product[] {
+  private initialProducts(): Product[] | any  {
     return [
       { id: 'p1', name: 'Computer', price: 10 },
       { id: 'p2', name: 'Mouse', price: 15 },

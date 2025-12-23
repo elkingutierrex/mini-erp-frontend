@@ -1,0 +1,43 @@
+.login-page {
+  min-height: 100vh;
+  background-image: url('/public/img/login-bg.png'); // 🔥 imagen corporativa
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.login-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.login-container {
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-card {
+  background: rgba(255, 255, 255, 0.96);
+  padding: 2.5rem;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 420px;
+
+  h2 {
+    font-weight: 600;
+  }
+}
+
+.demo-users {
+  font-size: 0.85rem;
+
+  ul {
+    padding-left: 1rem;
+    margin-bottom: 0.5rem;
+  }
+}
