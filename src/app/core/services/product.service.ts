@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   private readonly apiUrl = `${environment.apiUrl}/products`;
+  private readonly productUrl = `${environment.productUrl}/products`;
 
   constructor(
     private http: HttpClient,
@@ -19,7 +20,18 @@ export class ProductService {
   getAll(): Observable<Product[]> {
     return environment.useMock
       ? this.db.getProducts()
-      : this.http.get<Product[]>(this.apiUrl);
+      : this.http.get<Product[] | any>(this.productUrl)
+          .pipe(
+            map( response =>
+            response.products?.map((p: any) => ({
+            id: p.id,
+            title: p.title,
+            description: p.description,
+            price: p.price,
+            thumbnail: p.thumbnail,
+          }))
+          )
+        )
   }
 
   getById(id: string): Observable<Product> {
