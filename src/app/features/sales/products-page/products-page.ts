@@ -16,25 +16,18 @@ import { NotificationService } from '../../../core/services/notification.service
 })
 export class ProductsPage implements OnInit {
 
-  products: Product[] = [];
-  loading = true;
-
   constructor(
-    private productsService: ProductsService,
+    public productsService: ProductsService,
     private cartStore: CartStore,
     private notification: NotificationService
   ) {}
 
   ngOnInit(): void {
-    this.productsService.getProducts().subscribe({
-      next: (products : any ) => {
-        this.products = products;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-      }
-    });
+    this.getProducts();
+  }
+
+  getProducts(){
+    this.productsService.getProducts();
   }
 
   onAddToCart(product: Product) {

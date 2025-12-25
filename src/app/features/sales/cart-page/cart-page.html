@@ -1,0 +1,54 @@
+<div class="container py-4">
+
+  <h4 class="mb-4 text-light">Carrito de compras</h4>
+
+  <div *ngIf="cartStore.cartItems.length === 0"
+       class="alert alert-secondary text-center">
+    No hay productos en el carrito
+  </div>
+
+  <div class="row g-4" *ngIf="cartStore.cartItems.length > 0">
+
+    <div
+      class="col-12 col-md-8"
+      *ngFor="let item of cartStore.cartItems">
+
+      <div class="position-relative">
+
+        <app-product-card
+          [product]="item.product"
+          [showAddButton]="false">
+        </app-product-card>
+
+        <span class="badge bg-primary quantity-badge">
+          x{{ item.quantity }}
+        </span>
+
+        <button
+          class="btn btn-sm btn-outline-danger remove-btn"
+          (click)="remove(item.product.id)">
+          Eliminar
+        </button>
+
+      </div>
+
+    </div>
+
+    <!-- Resumen -->
+    <div class="col-12 col-md-4">
+      <div class="card bg-dark text-light p-3 shadow-sm">
+        <h6 class="mb-3">Resumen</h6>
+
+        <div class="d-flex justify-content-between mb-2">
+          <span>Total</span>
+          <strong>$ {{ total | number }}</strong>
+        </div>
+
+        <button class="btn btn-success w-100 mt-3">
+          Finalizar compra
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -11,26 +11,28 @@ export class ProductsService {
 
 private readonly productUrl = `${environment.productUrl}/products`;
 
-
-  // Signals (estado)
-  products = signal<Product[]>([]);
-  loading = signal<boolean>(false);
+  products  = signal<Product[]>([]);
+  loading   = signal<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<Product[]>   {
+  getProducts() {
     this.loading.set(true);
-    return this.http.get<Product[] | any>(this.productUrl)
+    this.http.get<any>(this.productUrl)
           .pipe(
             map( response =>
-            response.products?.map((p: any) => ({
+            response.products.map((p: any) => ({
             id: p.id,
             title: p.title,
             description: p.description,
             price: p.price,
             thumbnail: p.thumbnail,
           }))
-          )
+          ), finalize( ()=> this.loading.set(false))
         )
+        .subscribe({
+          next: (products) => this.products.set(products),
+          error: () => this.products.set([])
+        });
   }
 }
