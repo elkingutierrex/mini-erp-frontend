@@ -2,13 +2,15 @@ import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../models/product.model';
 import { map, finalize, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductsService {
 
-  private readonly apiUrl = 'https://dummyjson.com/products';
+private readonly productUrl = `${environment.productUrl}/products`;
+
 
   // Signals (estado)
   products = signal<Product[]>([]);
@@ -18,10 +20,17 @@ export class ProductsService {
 
   getProducts(): Observable<Product[]>   {
     this.loading.set(true);
-
-    this.http.get<any>(this.apiUrl)
-    return this.http.get<{ products: Product[] }>(this.apiUrl).pipe(
-        map(response => response.products)
-      );
+    return this.http.get<Product[] | any>(this.productUrl)
+          .pipe(
+            map( response =>
+            response.products?.map((p: any) => ({
+            id: p.id,
+            title: p.title,
+            description: p.description,
+            price: p.price,
+            thumbnail: p.thumbnail,
+          }))
+          )
+        )
   }
 }

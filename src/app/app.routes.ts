@@ -11,11 +11,12 @@ import { RolesCrud } from './features/manager/roles-crud/roles-crud';
 import { authGuard } from './core/guards/auth.guard-guard';
 import { roleGuard } from './core/guards/role.guard-guard';
 import { ManagerDashboard } from './features/manager/manager-dash-board/manager-dash-board';
+import { ProductsPage } from './features/sales/pages/products-page/products-page';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'ventas/products' },
   { path: 'auth/login', component: Login },
-  { path: 'ventas/products', component: ProductsList, canActivate: [authGuard] },
+  { path: 'ventas/products', component: ProductsPage, canActivate: [authGuard] },
   {
   path: 'products',
   loadComponent: () =>
