@@ -1,0 +1,59 @@
+<div class="login-page">
+  <div class="login-overlay"></div>
+
+  <div class="login-container">
+    <div class="login-card shadow-lg">
+
+      <app-logo></app-logo>
+      <p class="text-center text-muted mb-4">
+        Inicia sesión para continuar
+      </p>
+
+      <form (ngSubmit)="onLogin()">
+        <div class="mb-3">
+          <label class="form-label">Email</label>
+          <input
+            [(ngModel)]="email"
+            name="email"
+            type="email"
+            class="form-control"
+            placeholder="usuario@erp.test"
+            required
+          />
+        </div>
+
+        <div class="mb-4">
+          <label class="form-label">Password</label>
+          <input
+            [(ngModel)]="password"
+            name="password"
+            type="password"
+            class="form-control"
+            placeholder="••••••••"
+            required
+          />
+        </div>
+
+        <button class="btn btn-dark w-100">
+          Entrar
+        </button>
+      </form>
+
+      <div *ngIf="error" class="alert alert-danger mt-3">
+        {{ error }}
+      </div>
+
+      <div class="demo-users mt-4">
+        <small class="text-muted">Usuarios de prueba</small>
+        <ul>
+          <li>seller1@erp.test</li>
+          <li>seller2@erp.test</li>
+          <li>admin@erp.test</li>
+          <li>manager@erp.test</li>
+        </ul>
+        <small class="text-muted">Password: <strong>123</strong></small>
+      </div>
+
+    </div>
+  </div>
+</div>

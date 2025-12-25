@@ -1,0 +1,32 @@
+<div class="container py-4">
+
+  <h4 class="mb-4">Productos</h4>
+
+  <!-- Loader -->
+  <app-loader
+    *ngIf="productsService.loading()"
+    message="Cargando productos...">
+  </app-loader>
+
+  <!-- Grid productos -->
+  <div class="row g-4" *ngIf="!productsService.loading()">
+    <div
+      class="col-12 col-sm-6 col-md-4 col-lg-4"
+      *ngFor="let product of productsService.products()">
+
+      <app-product-card
+        [product]="product"
+        (addToCart)="onAddToCart($event)">
+      </app-product-card>
+
+    </div>
+
+  </div>
+</div>
+
+<pre>
+  productos:
+  {{
+    productsService.products() | json
+  }}
+</pre>

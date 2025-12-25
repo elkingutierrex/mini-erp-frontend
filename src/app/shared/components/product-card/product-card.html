@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div class="card product-card bg-dark text-light h-100 shadow-sm">
   <img
     [src]="product.thumbnail"
@@ -25,4 +26,45 @@
       </button>
     </div>
   </div>
+=======
+<div class="card product-card text-dark h-100 shadow-sm border-0">
+
+  <div class="row g-0 h-100 flex-column flex-md-row">
+
+    <!-- Texto -->
+    <div class="col-12 col-md-8 p-3 d-flex flex-column">
+      <h6 class="mb-2 text-truncate">
+        {{ product.title }}
+      </h6>
+
+      <p class="text-secondary small mb-2 d-none d-sm-block">
+        {{ product.description | slice:0:80 }}...
+      </p>
+
+      <div class="mt-auto">
+        <div class="fw-bold mb-2">
+          $ {{ product.price | number }}
+        </div>
+
+        <button
+          class="btn btn-primary btn-sm w-100"
+          (click)="addToCart.emit(product)">
+          Agregar al carrito
+        </button>
+      </div>
+    </div>
+
+    <!-- Imagen -->
+    <div
+      class="col-12 col-md-4 d-flex align-items-center justify-content-center p-2 product-image-container">
+      <img
+        [src]="product.thumbnail"
+        [alt]="product.title"
+        class="product-image"
+      />
+    </div>
+
+  </div>
+
+>>>>>>> recovery-fix
 </div>

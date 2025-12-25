@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+<<<<<<< HEAD
 
 export interface Product {
   id: number;
@@ -9,6 +10,9 @@ export interface Product {
   images?: string[];
   price?: number;
 }
+=======
+import { Product } from '../../../core/models/product.model';
+>>>>>>> recovery-fix
 
 @Component({
   selector: 'app-product-card',
