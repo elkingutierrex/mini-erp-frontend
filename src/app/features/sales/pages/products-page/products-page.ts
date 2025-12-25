@@ -26,15 +26,7 @@ export class ProductsPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productsService.getProducts().subscribe({
-      next: (products : any ) => {
-        this.products = products;
-        this.loading = false;
-      },
-      error: () => {
-        this.loading = false;
-      }
-    });
+    this.productsService.getProducts();
   }
 
   onAddToCart(product: Product) {
