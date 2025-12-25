@@ -10,17 +10,6 @@ import { Login } from './core/components/auth/login/login';
 
 export const routes: Routes = [
   { path: 'auth/login', component: Login },
-<<<<<<< HEAD
-  { path: 'ventas/products', component: ProductsList, canActivate: [authGuard] },
-  {
-  path: 'products',
-  loadComponent: () =>
-    import('./features/sales/pages/products-page/products-page')
-      .then(m => m.ProductsPage),
-  },
-  { path: 'ventas/create', component: CreateSale, canActivate: [authGuard] },
-  { path: 'ventas/mis-ventas', component: MySales, canActivate: [authGuard] },
-=======
   { path: 'ventas',
     children: [
       {
@@ -39,7 +28,6 @@ export const routes: Routes = [
 
     ]
   },
->>>>>>> recovery-fix
   { path: 'admin/all-sales', component: AllSales, canActivate: [roleGuard('CanViewAllSales')] },
   { path: 'manager/roles', component: RolesCrud, canActivate: [roleGuard('CanManageRoles')] },
   { path: 'manager/dashboard', component: ManagerDashboard, canActivate: [roleGuard('CanManageRoles')] },

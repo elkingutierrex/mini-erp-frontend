@@ -3,22 +3,14 @@ import { Component, OnInit } from '@angular/core';
 import { ChartData, ChartDataset, ChartOptions } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { SalesService } from '../../../core/services/sales.service';
-<<<<<<< HEAD
-import { DatePipe } from '@angular/common';
-=======
 import { CommonModule, DatePipe } from '@angular/common';
->>>>>>> recovery-fix
 
 @Component({
   standalone: true,
   selector: 'app-manager-dashboard',
   templateUrl: './manager-dash-board.html',
   styleUrls: ['./manager-dash-board.scss'],
-<<<<<<< HEAD
-  imports: [BaseChartDirective, DatePipe]
-=======
   imports: [CommonModule]
->>>>>>> recovery-fix
 })
 export class ManagerDashboard implements OnInit {
   chartData: ChartData<'bar', number[], string> = {
