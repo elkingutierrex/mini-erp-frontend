@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsService } from '../../../../core/services/products.serrvice';
-import { ProductCard } from '../../../../shared/components/product-card/product-card';
-import { Loader } from '../../../../shared/components/loader/loader';
-import { Product } from '../../../../core/models/product.model';
-import { CartStore } from '../../../../core/store/cart.store/cart.store';
-import { NotificationService } from '../../../../core/services/notification.service';
+import { ProductsService } from '../../../core/services/products.serrvice';
+import { ProductCard } from '../../../shared/components/product-card/product-card';
+import { Loader } from '../../../shared/components/loader/loader';
+import { Product } from '../../../core/models/product.model';
+import { CartStore } from '../../../core/store/cart.store/cart.store';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-products-page',

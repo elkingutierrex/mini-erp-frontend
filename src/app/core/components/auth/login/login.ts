@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../core/services/auth.service';
-import { Logo } from '../../../shared/components/logo/logo';
+import { Logo } from '../../../../shared/components/logo/logo';
+import { AuthService } from '../../../services/auth.service';
 
 
 @Component({
