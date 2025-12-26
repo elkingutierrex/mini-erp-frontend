@@ -1,11 +1,27 @@
+.cart-item {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
 .quantity-badge {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 8px;
+  right: 8px;
+  font-size: 0.75rem;
 }
 
 .remove-btn {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
+  bottom: 8px;
+  right: 8px;
+}
+
+.summary-card {
+  background: linear-gradient(180deg, #1e1e2f, #181825);
+  color: white;
+  border: none;
+  border-radius: 12px;
 }

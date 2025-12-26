@@ -1,34 +1,44 @@
 <div class="container py-4">
 
-  <h4 class="mb-4 text-light">Carrito de compras</h4>
+  <h4 class="mb-4">Carrito de compras</h4>
 
-  <div *ngIf="cartStore.cartItems.length === 0"
-       class="alert alert-secondary text-center">
+  <!-- Carrito vacío -->
+  <div
+    *ngIf="cartStore.cartItems.length === 0"
+    class="alert alert-secondary text-center">
     No hay productos en el carrito
   </div>
 
+  <!-- Contenido -->
   <div class="row g-4" *ngIf="cartStore.cartItems.length > 0">
 
-    <div
-      class="col-12 col-md-8"
-      *ngFor="let item of cartStore.cartItems">
+    <!-- Lista productos -->
+    <div class="col-12 col-md-8">
 
-      <div class="position-relative">
+      <div
+        class="cart-item mb-3"
+        *ngFor="let item of cartStore.cartItems">
 
-        <app-product-card
-          [product]="item.product"
-          [showAddButton]="false">
-        </app-product-card>
+        <div class="position-relative">
 
-        <span class="badge bg-primary quantity-badge">
-          x{{ item.quantity }}
-        </span>
+          <app-product-card
+            [product]="item.product"
+            [showAddButton]="false">
+          </app-product-card>
 
-        <button
-          class="btn btn-sm btn-outline-danger remove-btn"
-          (click)="remove(item.product.id)">
-          Eliminar
-        </button>
+          <!-- Cantidad -->
+          <span class="badge bg-primary quantity-badge">
+            x{{ item.quantity }}
+          </span>
+
+          <!-- Eliminar -->
+          <button
+            class="btn btn-sm btn-outline-danger remove-btn"
+            (click)="remove(item.product.id)">
+            ✕
+          </button>
+
+        </div>
 
       </div>
 
@@ -36,15 +46,17 @@
 
     <!-- Resumen -->
     <div class="col-12 col-md-4">
-      <div class="card bg-dark text-light p-3 shadow-sm">
+      <div class="card summary-card p-3 shadow-sm">
         <h6 class="mb-3">Resumen</h6>
 
         <div class="d-flex justify-content-between mb-2">
           <span>Total</span>
-          <strong>$ {{ total | number }}</strong>
+          <strong>{{ cartStore.total() | currency }}</strong>
         </div>
 
-        <button class="btn btn-success w-100 mt-3">
+        <button
+          class="btn btn-success w-100 mt-3"
+          (click)="checkout()">
           Finalizar compra
         </button>
       </div>
