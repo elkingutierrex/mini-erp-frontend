@@ -19,30 +19,66 @@
       <ul class="navbar-nav me-auto">
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/sales/products" routerLinkActive="active" (click)="close()">
+          <a class="nav-link"
+             routerLink="/sales/products"
+             routerLinkActive="active"
+             (click)="close()">
             Productos
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/sales/mis-ventas" routerLinkActive="active" (click)="close()">
+          <a class="nav-link"
+             routerLink="/sales/my-sales"
+             routerLinkActive="active"
+             (click)="close()">
             Mis Ventas
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/admin/all-sales" routerLinkActive="active" (click)="close()">
+          <a class="nav-link"
+             routerLink="/admin/all-sales"
+             routerLinkActive="active"
+             (click)="close()">
             Admin
           </a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLink="/manager/dashboard" routerLinkActive="active" (click)="close()">
+          <a class="nav-link"
+             routerLink="/manager/dashboard"
+             routerLinkActive="active"
+             (click)="close()">
             Gerente
           </a>
         </li>
 
       </ul>
+
+
+      <ul class="navbar-nav ms-auto">
+        <i class="bi bi-cart"></i>
+        <li class="nav-item position-relative">
+          <a
+            class="nav-link"
+            routerLink="/sales/cart"
+            routerLinkActive="active"
+            (click)="close()"
+          >
+            <i class="bi bi-cart3 fs-5"></i>
+
+          @if (cartStore.totalItems > 0) {
+            <span
+              class="badge rounded-pill bg-danger cart-badge"
+            >
+              {{ cartStore.totalItems }}
+            </span>
+          }
+          </a>
+        </li>
+      </ul>
+
     </div>
   </div>
 </nav>

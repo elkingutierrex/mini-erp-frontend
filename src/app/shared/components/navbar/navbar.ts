@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, computed, signal } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Logo } from '../logo/logo';
+import { CartStore } from '../../../core/store/cart.store';
 
 @Component({
   selector: 'app-navbar',
@@ -10,7 +11,10 @@ import { Logo } from '../logo/logo';
 })
 export class Navbar {
 
-   isOpen = signal(false);
+  isOpen = signal(false);
+
+
+  constructor(public cartStore: CartStore) {}
 
   toggle() {
     this.isOpen.update(v => !v);

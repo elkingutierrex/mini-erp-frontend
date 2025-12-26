@@ -21,5 +21,12 @@
 
     </div>
 
+     <app-pagination
+      [totalItems]="productsService.totalProducts()"
+      [pageSize]="pageSize"
+      [currentPage]="page"
+      (pageChange)="onPageChange($event)">
+    </app-pagination>
+
   </div>
 </div>

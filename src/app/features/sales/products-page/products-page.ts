@@ -6,15 +6,19 @@ import { Loader } from '../../../shared/components/loader/loader';
 import { Product } from '../../../core/models/product.model';
 import { CartStore } from '../../../core/store/cart.store';
 import { NotificationService } from '../../../core/services/notification.service';
+import { Pagination } from '../../../shared/components/pagination/pagination';
 
 @Component({
   selector: 'app-products-page',
   standalone: true,
-  imports: [CommonModule, ProductCard, Loader],
+  imports: [CommonModule, ProductCard, Loader, Pagination],
   templateUrl: './products-page.html',
   styleUrl: './products-page.scss',
 })
 export class ProductsPage implements OnInit {
+
+  page = 1;
+  pageSize = 12;
 
   constructor(
     public productsService: ProductsService,
@@ -27,7 +31,12 @@ export class ProductsPage implements OnInit {
   }
 
   getProducts(){
-    this.productsService.getProducts();
+    this.productsService.getProducts(this.page, this.pageSize);
+  }
+
+  onPageChange(page: number) {
+    this.page = page;
+    this.getProducts();
   }
 
   onAddToCart(product: Product) {

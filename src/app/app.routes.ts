@@ -11,6 +11,7 @@ import { Login } from './core/components/auth/login/login';
 export const routes: Routes = [
   { path : 'auth/login', component: Login },
   { path : 'sales',
+    canActivate: [authGuard],
     children: [
       {
         path: 'products',
@@ -24,14 +25,14 @@ export const routes: Routes = [
           import('./features/sales/cart-page/cart-page')
           .then(m => m.CartPage)
       },
-      { path: 'mis-ventas', component: MySales, canActivate: [authGuard] },
+      { path: 'my-sales', component: MySales },
       { path: 'checkout-success',
         loadComponent    : () =>
           import('./features/sales/checkout-success/checkout-success')
           .then(m => m.CheckoutSuccess),
       },
     ]
-  },
+    },
    { path: 'checkout-success',
         loadComponent    : () =>
           import('./features/sales/checkout-success/checkout-success')

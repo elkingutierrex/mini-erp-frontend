@@ -12,27 +12,37 @@ export class ProductsService {
 private readonly productUrl = `${environment.productUrl}/products`;
 
   products  = signal<Product[]>([]);
+  totalProducts  = signal<number>(0);
   loading   = signal<boolean>(false);
 
   constructor(private http: HttpClient) {}
 
-  getProducts() {
+  getProducts(page = 1, limit = 12) {
+      const skip = (page - 1) * limit;
+
     this.loading.set(true);
-    this.http.get<any>(this.productUrl)
+    this.http.get<any>(`${this.productUrl}?limit=${limit}&skip=${skip}`)
           .pipe(
-            map( response =>
-            response.products.map((p: any) => ({
+            map(response => ({
+          products: response.products.map( (p:any) => ({
             id: p.id,
             title: p.title,
             description: p.description,
             price: p.price,
             thumbnail: p.thumbnail,
-          }))
-          ), finalize( ()=> this.loading.set(false))
-        )
+          })),
+          total: response.total,
+        })),
+        finalize(() => this.loading.set(false))
+      )
         .subscribe({
-          next: (products) => this.products.set(products),
-          error: () => this.products.set([])
+          next: ({ products, total }) => {
+            this.products.set(products);
+            this.totalProducts.set(total);
+          }, error: () => {
+          this.products.set([]);
+          this.totalProducts.set(0);
+        }
         });
   }
 }
