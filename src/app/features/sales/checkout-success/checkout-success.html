@@ -1,0 +1,23 @@
+<div class="container py-5 text-center">
+
+  <div class="card bg-dark text-light p-4 shadow-lg success-card mx-auto">
+    <h3 class="mb-3">✅ Compra realizada</h3>
+
+    <p class="mb-2">Tu transacción fue procesada correctamente</p>
+
+    <div class="my-3">
+      <small class="text-secondary">CUS generado</small>
+      <h5 class="text-success">{{ cus }}</h5>
+    </div>
+
+    <div class="mb-4">
+      <strong>Total pagado:</strong>
+      {{ total | currency }}
+    </div>
+
+    <button class="btn btn-primary" (click)="goToProducts()">
+      Volver a productos
+    </button>
+  </div>
+
+</div>

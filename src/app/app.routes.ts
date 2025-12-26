@@ -9,27 +9,36 @@ import { ManagerDashboard } from './features/manager/manager-dash-board/manager-
 import { Login } from './core/components/auth/login/login';
 
 export const routes: Routes = [
-  { path: 'auth/login', component: Login },
-  { path: 'ventas',
+  { path : 'auth/login', component: Login },
+  { path : 'sales',
     children: [
       {
         path: 'products',
-        loadComponent: () =>
+        loadComponent   : () =>
           import('./features/sales/products-page/products-page')
-        .then(m => m.ProductsPage),
+          .then(m => m.ProductsPage),
       },
       {
         path: 'cart',
-        loadComponent: () =>
+        loadComponent   : () =>
           import('./features/sales/cart-page/cart-page')
-        .then(m => m.CartPage)
+          .then(m => m.CartPage)
       },
       { path: 'mis-ventas', component: MySales, canActivate: [authGuard] },
-
+      { path: 'checkout-success',
+        loadComponent    : () =>
+          import('./features/sales/checkout-success/checkout-success')
+          .then(m => m.CheckoutSuccess),
+      },
     ]
   },
-  { path: 'admin/all-sales', component: AllSales, canActivate: [roleGuard('CanViewAllSales')] },
-  { path: 'manager/roles', component: RolesCrud, canActivate: [roleGuard('CanManageRoles')] },
-  { path: 'manager/dashboard', component: ManagerDashboard, canActivate: [roleGuard('CanManageRoles')] },
-  { path: '', pathMatch: 'full', redirectTo: 'ventas/products' },
+   { path: 'checkout-success',
+        loadComponent    : () =>
+          import('./features/sales/checkout-success/checkout-success')
+          .then(m => m.CheckoutSuccess),
+      },
+  { path : 'admin/all-sales', component: AllSales, canActivate: [roleGuard('CanViewAllSales')] },
+  { path : 'manager/roles', component: RolesCrud, canActivate: [roleGuard('CanManageRoles')] },
+  { path : 'manager/dashboard', component: ManagerDashboard, canActivate: [roleGuard('CanManageRoles')] },
+  { path : '', pathMatch: 'full', redirectTo: 'sales/products' },
 ];

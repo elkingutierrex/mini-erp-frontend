@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ProductCard } from '../../../shared/components/product-card/product-card';
 import { CartStore } from '../../../core/store/cart.store';
+import { CusService } from '../../../core/services/cus.service';
 
 @Component({
   selector: 'app-cart-page',
@@ -16,7 +17,8 @@ export class CartPage {
 
   constructor(
     public cartStore: CartStore,
-    private router: Router
+    private router: Router,
+    private cusService: CusService
   ) {}
 
 
@@ -26,6 +28,18 @@ export class CartPage {
   }
 
   checkout() {
-    this.router.navigate(['/checkout']);
-  }
+  const cus = this.cusService.generate();
+  const total = this.cartStore.total();
+  console.log('Cus' + cus + 'total' + total );
+
+
+  this.cartStore.clearCart();
+
+  this.router.navigate(['/checkout-success'], {
+    state: {
+      cus,
+      total,
+    },
+  });
+}
 }
