@@ -16,32 +16,13 @@ export class SalesService {
     private auth: AuthService
   ) {}
 
-  // ============================
-  // CREATE SALE
-  // ============================
-  createSale(
-    items: { productId: string; quantity: number; price: number }[]
-  ): Observable<Sale> {
-    const total = items.reduce(
-      (sum, item) => sum + item.quantity * item.price,
-      0
-    );
-
-    if (environment.useMock) {
-      const sellerId = this.auth.getCurrentUser()!.id;
-      return this.db.addSale({ sellerId, items, total } as any);
-    }
-
-    // 🔥 NO enviamos sellerId (backend lo toma del JWT)
+  createSale(items: { productId: string|number; quantity: number; price: number, name:string }[], total:number ): Observable<Sale> {
     return this.http.post<Sale>(this.apiUrl, {
       items,
       total
     });
   }
 
-  // ============================
-  // GET MY SALES
-  // ============================
   getMySales(): Observable<Sale[]> {
     if (environment.useMock) {
       const me = this.auth.getCurrentUser()!.id;
@@ -53,9 +34,7 @@ export class SalesService {
     return this.http.get<Sale[]>(`${this.apiUrl}/my-sales`);
   }
 
-  // ============================
-  // GET ALL SALES (ADMIN)
-  // ============================
+
   getAllSales(): Observable<Sale[]> {
     return environment.useMock
       ? this.db.getSales()
